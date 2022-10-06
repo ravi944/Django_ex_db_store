@@ -17,7 +17,13 @@ def index(request):
  
     cur.execute("DROP TABLE IF EXISTS EMPLOYEE")
     sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first char(20) not null, last char(20), loc char(20) )"
+    
+    #### To create table for MOCK_DATA excel sheet in DB
+#     sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first_name char(20) not null, last_name char(20), email char(100),gender char(20),ip_address char(100) )"
+
     cur.execute(sql1) #table created
+    
+    
     
     
     if request.method == 'POST':
@@ -47,6 +53,11 @@ def index(request):
             l.append(tuple(sheet.row_values(i)))
         
         q="insert into excel_data19(id,first,last,loc)values(%s,%s,%s,%s)"
+        
+        #### To take values from excel sheet and merge with columns in table in DB
+#         q="insert into excel_data19(id,first_name,last_name,email,gender,ip_address)values(%s,%s,%s,%s,%s,%s)"
+
+
         cur.executemany(q,l)
         db.commit()
         db.close()
