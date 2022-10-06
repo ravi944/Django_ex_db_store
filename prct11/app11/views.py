@@ -16,7 +16,7 @@ def index(request):
     ## if we are creating table keep let it be(18,19,20 lines)
  
     cur.execute("DROP TABLE IF EXISTS EMPLOYEE")
-    sql1 = "CREATE TABLE EXCEL_DATA20 ( first char(20) not null, last char(20), loc char(20) )"
+    sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first char(20) not null, last char(20), loc char(20) )"
     cur.execute(sql1) #table created
     
     
@@ -34,8 +34,8 @@ def index(request):
 #     ext = os.path.splitext(loc)
     
 #     if ext[-1] == ".xlsx":
-#         p.save_book_as(file_name=str(loc),dest_file_name = 'your-new-file-out.xls')
-#         a = xlrd.open_workbook("your-new-file-out.xls")
+#         p.save_book_as(file_name=str(loc),dest_file_name = 'your-new-file.xls')
+#         a = xlrd.open_workbook("your-new-file.xls")
 #     else:
 #         a = xlrd.open_workbook(str(loc))
         
@@ -46,7 +46,7 @@ def index(request):
         for i in range(1,sheet.nrows):
             l.append(tuple(sheet.row_values(i)))
         
-        q="insert into excel_data19(first, last,loc )values(%s,%s,%s)"
+        q="insert into excel_data19(id,first,last,loc)values(%s,%s,%s,%s)"
         cur.executemany(q,l)
         db.commit()
         db.close()
