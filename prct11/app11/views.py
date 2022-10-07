@@ -1,13 +1,12 @@
 from django.shortcuts import render,HttpResponse
 import mysql.connector as mysql
-
 import xlrd
 import os
 import pyexcel as p
 import pathlib
 
 def index(request):
-
+    ##### FIRST METHOD
     
     db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample")
     cur = db.cursor()
@@ -35,15 +34,6 @@ def index(request):
             a = xlrd.open_workbook(str(loc))
         
 
-#     l=list()
-#     loc = ("D:\\sampl.xlsx")
-#     ext = os.path.splitext(loc)
-    
-#     if ext[-1] == ".xlsx":
-#         p.save_book_as(file_name=str(loc),dest_file_name = 'your-new-file.xls')
-#         a = xlrd.open_workbook("your-new-file.xls")
-#     else:
-#         a = xlrd.open_workbook(str(loc))
         
         sheet = a.sheet_by_index(0)
         sheet.cell_value(0,0)
@@ -61,6 +51,21 @@ def index(request):
         cur.executemany(q,l)
         db.commit()
         db.close()
+        
+        
+     ###SECOND METHOD
+    
+#     import pandas as pd
+#     from sqlalchemy import create_engine
+    
+#     engin = create_engine('mysql://root:1234@localhost/ravi')
+#     if request.method == 'POST':
+#         loc = request.FILES['myfile']
+     
+#         df = pd.read_excel(str(loc))
+#         df.to_sql('people12',con=engin,if_exists='append')
+
+
     
     
     return render(request, 'input.html')
