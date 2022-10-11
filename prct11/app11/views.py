@@ -17,7 +17,7 @@ def index(request):
     cur.execute("DROP TABLE IF EXISTS EMPLOYEE")
     sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first char(20) not null, last char(20), loc char(20) )"
     
-    #### To create table for MOCK_DATA excel sheet in DB
+    #### To create table for MOCK_DATA excel  sheet in DB
 #     sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first_name char(20) not null, last_name char(20), email char(100),gender char(20),ip_address char(100) )"
 
     cur.execute(sql1)
