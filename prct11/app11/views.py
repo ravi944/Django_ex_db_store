@@ -5,9 +5,10 @@ import os
 import pyexcel as p
 import pathlib
 
+
 def index(request):
     ##### FIRST METHOD
-    
+    c=0
     db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample1")
     cur = db.cursor()
     
@@ -29,6 +30,7 @@ def index(request):
         loc = request.FILES['myfile']
         if loc.name.endswith('.xlsx'):
             p.save_book_as(file_name=str(loc),dest_file_name = 'your-new-file-out.xls')
+            c=c+1
             a = xlrd.open_workbook("your-new-file-out.xls")
         else:
             a = xlrd.open_workbook(str(loc))
@@ -42,15 +44,18 @@ def index(request):
         for i in range(1,sheet.nrows):
             l.append(tuple(sheet.row_values(i)))
         
-        # q="insert into excel_datazyx(id,first,last,loc)values(%s,%s,%s,%s)"
+        q="insert into excel_datazyx(id,first,last,loc)values(%s,%s,%s,%s)"
         
         #### To take values from excel sheet and merge with columns in table in DB
-        q="insert into excel_dataxyz(id,first_name,last_name,email,gender,ip_address)values(%s,%s,%s,%s,%s,%s)"
+        # q="insert into excel_dataxyz(id,first_name,last_name,email,gender,ip_address)values(%s,%s,%s,%s,%s,%s)"
 
 
         cur.executemany(q,l)
         db.commit()
         db.close()
+
+        if c==1:
+            os.remove('your-new-file-out.xls')
         
         
      ###SECOND METHOD
