@@ -7,6 +7,8 @@ import pathlib
 
 
 def index(request):
+
+    
     ##### FIRST METHOD
     c=0
     db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample1")
