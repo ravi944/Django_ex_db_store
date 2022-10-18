@@ -8,19 +8,19 @@ import pathlib
 def index(request):
     ##### FIRST METHOD
     
-    db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample")
+    db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample1")
     cur = db.cursor()
     
     ## WE have to comment this when appending data to already exsting table
     ## if we are creating table keep let it be(18,19,20 lines)
  
     # cur.execute("DROP TABLE IF EXISTS EMPLOYEE")
-    # sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first char(20) not null, last char(20), loc char(20) )"
+    # sql1 = "CREATE TABLE EXCEL_DATAzyx ( id int not null, first char(20) not null, last char(20), loc char(20) )"
     
     #### To create table for MOCK_DATA excel  sheet in DB
-    sql1 = "CREATE TABLE EXCEL_DATA20 ( id int not null, first_name char(20) not null, last_name char(20), email char(100),gender char(20),ip_address char(100) )"
+    # sql1 = "CREATE TABLE EXCEL_DATAXYZ ( id int not null, first_name char(20) not null, last_name char(20), email char(100),gender char(20),ip_address char(100) )"
 
-    cur.execute(sql1)
+    # cur.execute(sql1)
     
     
     
@@ -42,10 +42,10 @@ def index(request):
         for i in range(1,sheet.nrows):
             l.append(tuple(sheet.row_values(i)))
         
-        q="insert into excel_data19(id,first,last,loc)values(%s,%s,%s,%s)"
+        # q="insert into excel_datazyx(id,first,last,loc)values(%s,%s,%s,%s)"
         
         #### To take values from excel sheet and merge with columns in table in DB
-#         q="insert into excel_data19(id,first_name,last_name,email,gender,ip_address)values(%s,%s,%s,%s,%s,%s)"
+        q="insert into excel_dataxyz(id,first_name,last_name,email,gender,ip_address)values(%s,%s,%s,%s,%s,%s)"
 
 
         cur.executemany(q,l)
