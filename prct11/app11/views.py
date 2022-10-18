@@ -6,6 +6,7 @@ import pyexcel as p
 import pathlib
 
 def index(request):
+
     ##### FIRST METHOD
     
     db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample")
