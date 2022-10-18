@@ -11,6 +11,8 @@ def index(request):
     
     db = mysql.connect(host="localhost",user="root",password="1234",database="db_of_sample")
     cur = db.cursor()
+
+    
     
     ## WE have to comment this when appending data to already exsting table
     ## if we are creating table keep let it be(18,19,20 lines)
